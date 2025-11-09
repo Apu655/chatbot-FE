@@ -20,8 +20,9 @@ const getSessionId = (): string => {
   return sid;
 };
 
-const CHAT_API_URL = "https://chatbot-be-zvln.onrender.com/chat";
-// import.meta.env.VITE_CHAT_API_URL ||
+const CHAT_API_URL =
+  // import.meta.env.VITE_CHAT_API_URL ||
+  "https://chatbot-be-zvln.onrender.com/chat";
 
 export const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
