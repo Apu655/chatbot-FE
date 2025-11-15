@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Chrome } from "lucide-react";
+// const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+// const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const Auth = () => {
     const navigate = useNavigate();
     const { toast } = useToast();
@@ -25,7 +27,6 @@ const Auth = () => {
         });
         return () => subscription.unsubscribe();
     }, [navigate]);
-    console.log("REDIRECT : URI :", window.location.origin);
     const handleGoogleSignIn = async () => {
         try {
             const { error } = await supabase.auth.signInWithOAuth({

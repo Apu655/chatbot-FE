@@ -8,6 +8,7 @@ import { AuthGuard } from "./components/AuthGuard";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+// import ClickJack from "./pages/ClickJack";
 const queryClient = new QueryClient();
 const App = () => (_jsx(QueryClientProvider, { client: queryClient, children: _jsxs(TooltipProvider, { children: [_jsx(Toaster, {}), _jsx(Sonner, {}), _jsx(BrowserRouter, { children: _jsxs(Routes, { children: [_jsx(Route, { path: "/auth", element: _jsx(Auth, {}) }), _jsx(Route, { path: "/", element: _jsx(AuthGuard, { children: _jsx(Index, {}) }) }), _jsx(Route, { path: "*", element: _jsx(NotFound, {}) })] }) })] }) }));
 export default App;

@@ -7,6 +7,7 @@ import { AuthGuard } from "./components/AuthGuard";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+// import ClickJack from "./pages/ClickJack";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/click-jack" element={<ClickJack />} /> */}
+
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/"
