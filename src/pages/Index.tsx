@@ -3,16 +3,16 @@ import ChatMessage from "@/components/ChatMessage";
 import ChatInput from "@/components/ChatInput";
 import TypingIndicator from "@/components/TypingIndicator";
 import { useChat } from "@/hooks/useChat";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Bot, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+// import { useNavigate } from "react-router-dom";
+// import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const { messages, isLoading, sendMessage, messagesEndRef } = useChat();
-  const navigate = useNavigate();
-  const { toast } = useToast();
+  // const navigate = useNavigate();
+  // const { toast } = useToast();
   const [user, setUser] = useState({
     email: "",
     full_name: "",
@@ -20,14 +20,19 @@ const Index = () => {
   });
 
   const getAuthSession = async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    console.log("Session : ", session);
-    setUser({ ...user, full_name: session?.user?.user_metadata?.full_name });
-    if (session?.user?.role !== "authenticated") {
-      navigate("/auth");
-    }
+    setUser({
+      email: "apu.islam@g.bracu.ac.bd",
+      full_name: "Apu Islam",
+      email_verified: true,
+    });
+    // const {
+    //   data: { session },
+    // } = await supabase.auth.getSession();
+    // console.log("Session : ", session);
+    // setUser({ ...user, full_name: session?.user?.user_metadata?.full_name });
+    // if (session?.user?.role !== "authenticated") {
+    //   navigate("/auth");
+    // }
   };
 
   useEffect(() => {
@@ -36,18 +41,21 @@ const Index = () => {
   }, []);
 
   const handleSignOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      navigate("/auth", { replace: true });
-    } catch (error) {
-      console.error("Sign out error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to sign out",
-        variant: "destructive",
-      });
-    }
+    // try {
+    //   const { error } = await supabase.auth.signOut();
+    //   if (error) throw error;
+    //   navigate("/auth", { replace: true });
+    // } catch (error) {
+    //   console.error("Sign out error:", error);
+    //   localStorage.clear();
+    //   sessionStorage.clear();
+    //   navigate("/auth");
+    //   toast({
+    //     title: "Error",
+    //     description: "Failed to sign out",
+    //     variant: "destructive",
+    //   });
+    // }
   };
 
   return (
@@ -61,11 +69,9 @@ const Index = () => {
                 <Bot className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">
-                  AI Chatbot
-                </h1>
+                <h1 className="text-xl font-bold text-foreground">SeCAREly</h1>
                 <p className="text-sm text-muted-foreground">
-                  Your intelligent assistant
+                  Your intelligent healthcare assistant
                 </p>
               </div>
             </div>
@@ -97,11 +103,11 @@ const Index = () => {
                 <Bot className="h-8 w-8" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold mb-2">
-                Welcome to Health AI Chatbot
+                Welcome {user && user.full_name && user.full_name}
               </h2>
               <p className="text-muted-foreground max-w-md">
                 Start a conversation by typing your message below. I'm here to
-                help with any questions you have!
+                help with any health related questions you have!
               </p>
             </div>
           )}

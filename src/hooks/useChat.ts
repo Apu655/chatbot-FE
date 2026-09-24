@@ -60,6 +60,27 @@ export const useChat = () => {
 
         // Handle non-2xx responses with readable errors
         if (!response.ok) {
+          // 🔹 NEW: special handling for 5xx server errors
+          if (response.status >= 500) {
+            const assistantMessage: Message = {
+              role: "assistant",
+              content:
+                "I’m unable to answer that right now. Can you kindly try again?",
+            };
+            setMessages((prev) => [...prev, assistantMessage]);
+
+            // Optional: soft toast, but not destructive
+            toast({
+              title: "Temporary issue",
+              description:
+                "The server had a problem processing your request. Please try again in a moment.",
+            });
+
+            // We handled it gracefully — don’t throw, don’t roll back
+            return;
+          }
+
+          // For non-5xx errors, keep current behavior
           let serverMsg = "";
           try {
             const data = await response.json();
@@ -95,7 +116,6 @@ export const useChat = () => {
 
         setMessages((prev) => [...prev, assistantMessage]);
       } catch (error) {
-        console.error("Chat error:", error);
         toast({
           title: "Error",
           description:
@@ -103,7 +123,8 @@ export const useChat = () => {
           variant: "destructive",
         });
 
-        // Roll back user message so the UI doesn’t get stuck with an orphaned entry
+        // ⛔ Keep current rollback behavior ONLY for non-5xx errors
+        // (5xx path above returns early and never reaches here)
         setMessages((prev) =>
           prev.filter(
             (msg) => !(msg.role === "user" && msg.content === content)

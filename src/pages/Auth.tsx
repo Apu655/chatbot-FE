@@ -64,7 +64,7 @@ const Auth = () => {
       <div className="w-full max-w-md p-8 space-y-6 bg-card/50 backdrop-blur-sm rounded-2xl shadow-xl border border-border/50">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            Welcome to AI Health Chatbot
+            Welcome! I’m SeCAREly, your AI health companion.
           </h1>
           <p className="text-muted-foreground">
             Sign in to start chatting with our AI assistant
